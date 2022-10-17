@@ -22,7 +22,23 @@ const UpdateUser = () => {
         setUser(updatedUser);
     }
     const handleUpdateUser = e => {
+        const url = `http://localhost:5000/users/${id}`;
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(user)
 
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    alert('updated successfully');
+                    setUser({});
+                }
+            })
+        e.preventDefault();
     }
     return (
         <div>
